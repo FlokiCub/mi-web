@@ -1,0 +1,36 @@
+# fly.toml - Configuración para Laravel en fly.io
+app = "mi-web"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_ENV = "production"
+  APP_DEBUG = "false"
+  LOG_CHANNEL = "stderr"
+  CACHE_DRIVER = "file"
+  SESSION_DRIVER = "file"
+  QUEUE_CONNECTION = "sync"
+  DB_CONNECTION = "sqlite"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[mounts]
+  source = "laravel_storage"
+  destination = "/var/www/html/storage"
+
+[processes]
+  app = "php artisan serve --host=0.0.0.0 --port=8080"
+  # worker = "php artisan queue:work --sleep=3 --tries=3"  # Descomenta si necesitas queue worker

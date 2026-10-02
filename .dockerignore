@@ -1,0 +1,59 @@
+# .dockerignore para Laravel en fly.io
+.git
+.gitignore
+.github
+.gitlab
+.gitlab-ci.yml
+
+# Dependencias (se instalan en el build)
+vendor
+node_modules
+
+# Build output (se genera en el build)
+public/build
+public/hot
+
+# Storage y cache (volúmenes persistentes en fly.io)
+storage/*
+!storage/app/public
+bootstrap/cache/*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE y editor
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Tests
+phpunit.xml
+tests
+
+# Documentación
+README.md
+CHANGELOG.md
+AUDIT_SCGI_ROADMAP.md
+
+# Docker
+Dockerfile
+docker/
+docker-compose.yml
+docker-compose.override.yml
+
+# Varios
+.phpactor.json
+.phpunit.result.cache
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SQLite database (se crea en runtime)
+database/database.sqlite
